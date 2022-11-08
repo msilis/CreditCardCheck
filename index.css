@@ -1,0 +1,63 @@
+body {
+  background-color: gainsboro;
+}
+
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  appearance: none; 
+}
+p, h4, h5, li {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+input[type=number] {
+  appearance: textfield;
+}
+
+.card-Card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    height: 20rem;
+    width: 40rem;
+    border: 3px solid slategray;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 5px 5px 5px gray;
+    background-color: white;
+}
+
+
+
+.cardText {
+    
+    background-color: azure;
+    border-radius: 10px;
+    padding-left: .25rem;
+    padding-right: .25rem;
+    margin: .5rem;
+}
+
+#result-card {
+    display: flex;
+    justify-content: center;
+    height: 2rem;
+    width: 20rem;
+}
+
+#footer-tag {
+  text-align: center;
+}
+
+#github-link {
+  font-size: .75rem;
+  
+}
+
+a {
+  text-decoration: none;
+}

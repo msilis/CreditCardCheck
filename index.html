@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Credit Card Checker</title>
+    <link rel="stylesheet" href="./index.css" />
+    <link rel="icon" type="imag/x-icon" href="./favicon.ico" />
+  </head>
+  <body>
+    <div class="card-Card">
+      <div class="cardText">
+        <h4 id="heading-text">Enter card number to check validity.</h4>
+      </div>
+      <div id="input-submit">
+        <input
+          id="card-input"
+          type="text"
+          maxlength="16"
+          size="40"
+          placeholder="Enter Card Number"
+        />
+        <button
+          type="submit"
+          id="submit-button"
+          onClick="checkCard()"
+          title="Check card number"
+        >
+          Check
+        </button>
+      </div>
+      <div id="result-card">
+        <p id="result-text"></p>
+      </div>
+      <div id="samlpe-number-card">
+        <h5 id="sample-heading">Here are some sample numbers to try:</h5>
+        <ul>
+          <li>Card 1: 4539677908016808</li>
+          <li>Card 2: 5795593392134643</li>
+          <li>Card 3: 6011144340682905</li>
+        </ul>
+      </div>
+      <div id="footer-tag">
+        <p>
+          This simple app uses the
+          <a
+            href="https://en.wikipedia.org/wiki/Luhn_algorithm"
+            target="blank"
+            title="Link to Wikipedia"
+            >Luhn algorithm</a
+          >
+          to check credit card validity.
+        </p>
+        <a href="https://github.com/msilis" target="blank"><p id="github-link">github.com/msilis</p></a>
+      </div>
+    </div>
+
+    <!-- The JS that makes it work     -->
+    <script>
+      function getInputValue() {
+        let input = document.getElementById("card-input").value;
+        let numberFunction = (num) => Number(num);
+        let cardArray = Array.from(String(input), numberFunction);
+        return cardArray;
+      }
+
+      const cardToCheck = getInputValue();
+
+      const validateCred = (arr) => {
+        //Take off check digit
+        let slicedNum = arr.slice(arr.length - 1, arr.length);
+        console.log(arr);
+
+        //Produce array without check digit
+
+        let slicedArr = arr.slice(0, arr.length - 1);
+
+        //Reverse array
+
+        let reverseArr = slicedArr.reverse();
+
+        //Multiply odd indexes by 2
+
+        let multiplyArray = [];
+        for (let i = 0; i < slicedArr.length; i++) {
+          if (i % 2 === 0) {
+            console.log(multiplyArray);
+            multiplyArray.push(slicedArr[i] * 2);
+          } else multiplyArray.push(slicedArr[i]);
+        }
+
+        //Subtract 9 from numbers that are larger than 9 and push them to array
+
+        let shortenedNum = [];
+        for (let j = 0; j < multiplyArray.length; j++) {
+          if (multiplyArray[j] > 9) {
+            console.log(shortenedNum);
+            shortenedNum.push(multiplyArray[j] - 9);
+          } else shortenedNum.push(multiplyArray[j]);
+        }
+        //Get sum of all numbers
+
+        let sum = 0;
+        for (let value of shortenedNum) {
+          sum += value;
+          console.log(sum);
+        }
+        //Add check number back to card number
+
+        let checkNumber = sum + parseInt(slicedNum);
+
+        //Find if modulo 10 is zero
+
+        if (checkNumber % 10 === 0) {
+          console.log(checkNumber);
+          return true;
+        } else {
+          return false;
+        }
+      };
+
+      function checkCard() {
+        if (validateCred(getInputValue())) {
+          document.getElementById(
+            "result-text"
+          ).innerHTML = `Card number ${getInputValue().join("")} is valid`;
+          document.getElementById("card-input").value = "";
+        } else {
+          document.getElementById(
+            "result-text"
+          ).innerHTML = `Card number ${getInputValue().join("")} is not valid.`;
+          document.getElementById("card-input").value = "";
+        }
+      }
+    </script>
+  </body>
+</html>
