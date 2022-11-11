@@ -52,7 +52,7 @@
           >
           to check credit card validity.
         </p>
-        <a href="https://github.com/msilis" target="blank"><p id="github-link">github.com/msilis</p></a>
+        <a href="https://github.com/msilis" target="_blank"><p id="github-link">github.com/msilis</p></a>
       </div>
     </div>
 
@@ -62,7 +62,17 @@
         let input = document.getElementById("card-input").value;
         let numberFunction = (num) => Number(num);
         let cardArray = Array.from(String(input), numberFunction);
-        return cardArray;
+        if (isNaN(input)){
+            console.log(input)
+            alert('Please enter a number.')
+        } else {
+            document.getElementById('submit-button').addEventListener("click", () => {
+                document.getElementById("card-input").focus();
+            });
+            return cardArray;
+        }
+
+        
       }
 
       const cardToCheck = getInputValue();
@@ -121,6 +131,7 @@
       };
 
       function checkCard() {
+        
         if (validateCred(getInputValue())) {
           document.getElementById(
             "result-text"
